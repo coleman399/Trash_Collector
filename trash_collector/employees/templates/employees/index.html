@@ -1,0 +1,78 @@
+{% extends 'employees\employee_base.html' %}
+
+{% block title %} Employee Home {% endblock %}
+
+{% block header %} Employee Portal {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %} 
+  Hello Employee {{ logged_in_employee.name }}!
+    <br>
+    <div class="border border-success rounded bg-success">
+    <table class="table table-light">
+      <h4>Customers in route today:</h4>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Pickup Day</th> 
+        <th scope="col">Last Pickup</th>
+        <th scope="col">Verification</th>
+      </tr>
+      {% if scheduled_customers != None %}
+        {% for customer in scheduled_customers %}
+          <form action="{% url 'employees:confirm_pickup' customer.id %}">
+            <tr>
+              <td>{{customer.name}}</td>
+              <td>{{customer.address}}</td>
+              <td>{{customer.weekly_pickup}}</td>
+              <td>{{customer.date_of_last_pickup}}</td>
+              <td><input type="submit" value="Accept"></td>
+            </tr>
+          </form>
+        {% endfor %}
+      {% endif %}
+      </table>
+    </div>
+    <br>
+    <br>
+    <div class="border border-success rounded bg-success">
+    Pickup Schedule:
+    <form action="{% url 'employees:index' %}" method="post">
+      {% csrf_token %}
+      <select name="pickup_day_drop_down" id="pickup_day_drop_down">
+        <option value="MONDAY">MONDAY</option>
+        <option value="TUESDAY">TUESDAY</option>
+        <option value="WEDNESDAY">WEDNESDAY</option>
+        <option value="THURSDAY">THURSDAY</option>
+        <option value="FRIDAY">FRIDAY</option>
+        <option value="SATURDAY">SATURDAY</option>
+        <option value="SUNDAY">SUNDAY</option>
+      </select>
+      <input type = "submit" value="View">
+    </form>
+    <table class = "table table-light table-hover">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Pickup Day</th>
+        <th scope="col">Last Pickup</th>
+      </tr>
+      {% if customers_that_share_pickup_day != None %}
+        {% for customer in customers_that_share_pickup_day %}
+        <tr>
+          <td>{{customer.name}}</td>
+          <td>{{customer.address}}</td>
+          <td>{{customer.weekly_pickup}}</td>
+          <td>{{customer.date_of_last_pickup}}</td>
+        </tr>
+        {% endfor %}
+      {% endif %}
+    </table>
+  </div>
+</div>
+{% else %}
+  <p>You are at the employee index, but you are not logged in.</p>
+  <a href="{% url 'login' %}">Log In</a>
+  <a href="{% url 'accounts:register' %}">Sign Up</a>
+{% endif %}
+{% endblock %}

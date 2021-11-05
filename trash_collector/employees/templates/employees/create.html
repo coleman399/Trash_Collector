@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Employee Create {% endblock %}
+
+{% block header %} Please Complete Registration {% endblock %}
+
+{% block content %}
+<div class = "container">
+    <form action="{% url 'employees:create' %}" method="post">
+    {% csrf_token %}
+    <label>Please choose a pickup day</label>
+        <select name="pickup_day">
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
