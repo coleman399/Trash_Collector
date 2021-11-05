@@ -4,11 +4,12 @@
 
 {% block header %} Employee Portal {% endblock %}
 
-{% block content %}
+{% block greeting %} Welcome Employee {{ logged_in_employee.name }}!{% endblock %}
+
 {% if user.is_authenticated %} 
-  Hello Employee {{ logged_in_employee.name }}!
+  {% block content %}
     <br>
-    <div class="border border-success rounded bg-success">
+    <div class="border border-success rounded bg-warning">
     <table class="table table-light">
       <h4>Customers in route today:</h4>
       <tr>
@@ -26,7 +27,7 @@
               <td>{{customer.address}}</td>
               <td>{{customer.weekly_pickup}}</td>
               <td>{{customer.date_of_last_pickup}}</td>
-              <td><input type="submit" value="Accept"></td>
+              <td><button class="btn btn-success" type="submit">Accept</button></td>
             </tr>
           </form>
         {% endfor %}
@@ -35,11 +36,12 @@
     </div>
     <br>
     <br>
-    <div class="border border-success rounded bg-success">
-    Pickup Schedule:
+    <div class="border border-success rounded bg-warning">
     <form action="{% url 'employees:index' %}" method="post">
       {% csrf_token %}
-      <select name="pickup_day_drop_down" id="pickup_day_drop_down">
+      <h4>Pickup Schedule:</h4>
+      <select class="form-select from-select-md w-25" name="pickup_day_drop_down" id="pickup_day_drop_down">
+        <option selected>----------</option>
         <option value="MONDAY">MONDAY</option>
         <option value="TUESDAY">TUESDAY</option>
         <option value="WEDNESDAY">WEDNESDAY</option>
@@ -48,9 +50,11 @@
         <option value="SATURDAY">SATURDAY</option>
         <option value="SUNDAY">SUNDAY</option>
       </select>
-      <input type = "submit" value="View">
+      <button type="submit" class="btn btn-success">View</button>
+      <br>
+      <br>
     </form>
-    <table class = "table table-light table-hover">
+    <table class="table table-light table-hover">
       <tr>
         <th scope="col">Name</th>
         <th scope="col">Address</th>
@@ -68,11 +72,12 @@
         {% endfor %}
       {% endif %}
     </table>
+    </div>
   </div>
 </div>
-{% else %}
-  <p>You are at the employee index, but you are not logged in.</p>
-  <a href="{% url 'login' %}">Log In</a>
-  <a href="{% url 'accounts:register' %}">Sign Up</a>
-{% endif %}
 {% endblock %}
+{% else %}
+<p>You are at the employee index, but you are not logged in.</p>
+<a href="{% url 'login' %}">Log In</a>
+<a href="{% url 'accounts:register' %}">Sign Up</a>
+{% endif %}

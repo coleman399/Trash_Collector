@@ -92,5 +92,3 @@ def confirm_pickup(request, customer_id):
     customer.balance -= 20
     customer.save()
     return HttpResponseRedirect(reverse('employees:index'))
-
-       

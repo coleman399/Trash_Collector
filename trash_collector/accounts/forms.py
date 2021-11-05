@@ -28,4 +28,3 @@ class CustomUserForm(UserCreationForm):
                 customers.user_set.add(user)
         return user
 
-

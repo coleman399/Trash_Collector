@@ -144,10 +144,3 @@ AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_REDIRECT_URL = 'home'
-
-# This will import the local_settings.py file
-# If you receive messages about missing a SECRET_KEY, you are likely missing the local_settings.py due to re-cloning your repo
-try:
-    from trash_collector.local_settings import *
-except ImportError:
-    pass
