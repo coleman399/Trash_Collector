@@ -11,7 +11,7 @@
     <br>
     <div class="border border-success rounded bg-warning">
     <table class="table table-light">
-      <h4>Customers in route today:</h4>
+      <h4 class = "mx-3">Customers in route today:</h4>
       <tr>
         <th scope="col">Name</th>
         <th scope="col">Address</th>
@@ -39,8 +39,8 @@
     <div class="border border-success rounded bg-warning">
     <form action="{% url 'employees:index' %}" method="post">
       {% csrf_token %}
-      <h4>Pickup Schedule:</h4>
-      <select class="form-select from-select-md w-25" name="pickup_day_drop_down" id="pickup_day_drop_down">
+      <h4 class="mx-3">Pickup Schedule:</h4>
+      <select class="mx-3 form-select from-select-md w-25" name="pickup_day_drop_down" id="pickup_day_drop_down">
         <option selected>----------</option>
         <option value="MONDAY">MONDAY</option>
         <option value="TUESDAY">TUESDAY</option>
@@ -50,7 +50,8 @@
         <option value="SATURDAY">SATURDAY</option>
         <option value="SUNDAY">SUNDAY</option>
       </select>
-      <button type="submit" class="btn btn-success">View</button>
+      <br>
+      <button type="submit" class="mx-3 btn btn-success">View</button>
       <br>
       <br>
     </form>
