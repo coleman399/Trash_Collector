@@ -1,4 +1,4 @@
-![Screenshot (35)](https://user-images.githubusercontent.com/91759734/140570812-1c84b788-7c36-4843-b96f-22e79d5ab4f3.png)
+![Screenshot (44)](https://user-images.githubusercontent.com/91759734/140836666-5502d756-e198-496f-a6bd-73ac2f78e6f8.png)
 
 Trash Collector – Django Web Application – 85 points
 
